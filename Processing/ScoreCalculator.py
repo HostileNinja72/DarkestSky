@@ -18,7 +18,7 @@ class ScoreCalculator:
         # Assuming a data source or API which provides the values for each factor
         self.data_source = DataSource()
 
-    def normalize(self, value, max_value, min_value=0, reverse=False):
+    def _normalize(self, value, max_value, min_value=0, reverse=False):
         normalized = (value - min_value) / (max_value - min_value)
         return 1 - normalized if reverse else normalized
 
