@@ -15,7 +15,7 @@ while True:
         scoreCache.status()
     elif choice == '2':
         best_coordinate, best_score = scoreCache.get_best_coordinate()
-        pprint(best_coordinate, best_score)
+        pprint((best_coordinate, best_score))
     elif choice == '3':
         break
     else:
