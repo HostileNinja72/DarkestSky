@@ -55,21 +55,17 @@ class ScoreCache:
         while True:
             stdscr.clear()
 
-            # Get window dimensions
             height, width = stdscr.getmaxyx()
 
-            # Print title
+        
             stdscr.addstr(0, 0, "Priority Queue (from highest to lowest score):", curses.A_BOLD)
 
-            # Print table headers with added space
             stdscr.addstr(2, 0, "Coordinate", curses.A_UNDERLINE)
             stdscr.addstr(2, 40, "Score", curses.A_UNDERLINE)
             stdscr.addstr(2, 60, "Status", curses.A_UNDERLINE)
 
-            # Sort and print each entry
             temp_queue = sorted(self.queue, key=lambda x: (x[0], x[1]))
 
-            # Calculate the number of items we can display, considering the header
             max_items = height - 4
 
             for idx, (negative_score, expiry_time, coordinate) in enumerate(temp_queue[offset:offset+max_items], start=3):
@@ -79,13 +75,12 @@ class ScoreCache:
                 stdscr.addstr(idx, 40, str(-negative_score))
                 stdscr.addstr(idx, 60, expiry_time_str)
 
-            # If there are more items, indicate that more items can be shown by scrolling
+          
             if len(temp_queue) > offset + max_items:
                 stdscr.addstr(height - 1, 0, "...Press DOWN for more items...", curses.A_BOLD)
             elif offset > 0:
                 stdscr.addstr(height - 1, 0, "...Press UP for previous items...", curses.A_BOLD)
 
-            # Wait for space key, up arrow, down arrow, or 'q' key for quitting
             key = stdscr.getch()
             if key == curses.KEY_DOWN and len(temp_queue) > offset + max_items:
                 offset += 1
