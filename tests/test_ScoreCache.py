@@ -1,5 +1,5 @@
 import unittest
-from ScoreCache import ScoreCache
+from src.ScoreCache import ScoreCache
 
 class TestScoreCache(unittest.TestCase):
 

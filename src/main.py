@@ -1,7 +1,7 @@
 from Processing.CoordinateGenerator import CoordinateGenerator
 from Processing.MoonHandler import MoonHandler
 from pprint import pprint 
-from ScoreCache import ScoreCache
+from src.ScoreCache import ScoreCache
 from Config.config import LAT, LON, RADIUS
 
 def initialize_system():

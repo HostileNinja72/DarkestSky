@@ -3,7 +3,7 @@
 tests/morocco.py
 tests/moon.py
 
-data/
+resources/
 
 __pycache__/
 *.pyc

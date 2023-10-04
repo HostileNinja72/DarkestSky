@@ -1,5 +1,5 @@
 from Config.config import RADIUS
-from DataSource import DataSource
+from src.DataSource import DataSource
 
 class ScoreCalculator:
 

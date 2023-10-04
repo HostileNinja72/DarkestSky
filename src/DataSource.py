@@ -1,8 +1,8 @@
 import random
 import requests 
-from src.Processing.BrightnessCalculator import BrightnessCalculator
-from src.Processing.MoonHandler import MoonHandler
-from src.Config.config import LIGHT_POLLUTION_KEY as key_lp
+from Processing.BrightnessCalculator import BrightnessCalculator
+from Processing.MoonHandler import MoonHandler
+from Config.config import LIGHT_POLLUTION_KEY as key_lp
 from datetime import datetime
 
 class DataSource:

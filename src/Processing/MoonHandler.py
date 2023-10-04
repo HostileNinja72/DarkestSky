@@ -2,8 +2,8 @@ import spiceypy as spice
 import numpy as np
 import math
 
-spice.furnsh('data/naif0012.tls')  # Load the leap seconds kernel
-spice.furnsh('data/DE430.bsp')  # Load the ephemeris file
+spice.furnsh('../../resources/naif0012.tls')  # Load the leap seconds kernel
+spice.furnsh('../../resources/de430.bsp')  # Load the ephemeris file
 
 
 class MoonHandler:
@@ -36,10 +36,9 @@ class MoonHandler:
             O_degrees = -O_degrees
         
         return O_degrees
-    def brightness(self):
-        D = ((1/pow(self.calculate_distance()))-(1/pow(405696)))/(1/pow(363104)-1/pow(405696))
-        P = abs(self.phase())/180
-        return D*P
+    
+    def brightness(self): 
+        return ((abs(self.phase())/180)*((self.calculate_distance()/356500)))/1.3
     
 
 

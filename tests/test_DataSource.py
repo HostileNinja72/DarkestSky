@@ -1,6 +1,6 @@
 # tests/test_DataSource.py
 import unittest
-from DataSource import DataSource
+from src.DataSource import DataSource
 
 class TestDataSource(unittest.TestCase):
 
