@@ -17,7 +17,7 @@ class ScoreCalculator:
     def __init__(self):
         # Assuming a data source or API which provides the values for each factor
         self.data_source = DataSource()
-
+    
     def normalize(self, value, max_value, min_value=0, reverse=False):
         normalized = (value - min_value) / (max_value - min_value)
         return 1 - normalized if reverse else normalized
@@ -38,7 +38,7 @@ class ScoreCalculator:
         scores = {
             "light_pollution": self.normalize(light_pollution, max_value=25, min_value = 15, reverse=True),
             "clouds": self.normalize(clouds, max_value=100, reverse=True),
-            "moon": self.normalize(moon, max_value=100, reverse=True),
+            "moon": self.normalize(moon, max_value=1, reverse=True),
             "elevation": self.normalize(elevation, max_value=3000),  # assuming max elevation of 5000 meters
             "air_quality": self.normalize(air_quality, max_value=500, reverse=True),  # assuming AQI max of 500
             "wind": self.normalize(wind, max_value=50, reverse=True),  # assuming max wind speed of 50 km/h

@@ -1,0 +1,11 @@
+# .gitignore
+
+tests/morocco.py
+tests/moon.py
+
+data/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

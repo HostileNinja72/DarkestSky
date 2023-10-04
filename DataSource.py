@@ -1,13 +1,15 @@
 import random
 import requests 
 from Processing.BrightnessCalculator import BrightnessCalculator
+from Processing.MoonHandler import MoonHandler
 from Config.config import LIGHT_POLLUTION_KEY as key_lp
+from datetime import datetime
 
 class DataSource:
 
     def __init__(self):
-        # In a real-world scenario, you might initialize connections to databases, APIs, etc. here.
-        pass
+        self.noform_time = datetime.now()
+        self.time = self.noform_time.strftime("%Y-%m-%d %H:%M:%S")
 
     def get_light_pollution(self, coordinate):
         lat, long = coordinate
@@ -43,9 +45,8 @@ class DataSource:
         # Random cloud coverage percentage between 0 (clear sky) and 100 (fully clouded)
         return random.uniform(0, 100)
 
-    def get_moon_brightness(self, coordinate):
-        # Random moon brightness between 0 (new moon) and 100 (full moon)
-        return random.uniform(0, 100)
+    def get_moon_brightness(self):
+        return MoonHandler(self.time).brightness();
 
     def get_elevation(self, coordinate):
         # Random elevation value between 0 and 5000 meters

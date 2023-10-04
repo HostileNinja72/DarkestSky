@@ -12,7 +12,7 @@ class TestDataSource(unittest.TestCase):
         result = self.data_source.get_light_pollution(coordinate)
         self.assertIsNotNone(result)
 
-    # Similarly, you can add tests for other methods like get_clouds, get_moon_brightness, etc.
+    
 
 if __name__ == '__main__':
     unittest.main()

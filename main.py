@@ -1,4 +1,5 @@
 from Processing.CoordinateGenerator import CoordinateGenerator
+from Processing.MoonHandler import MoonHandler
 from pprint import pprint 
 from ScoreCache import ScoreCache
 from Config.config import LAT, LON, RADIUS
@@ -17,7 +18,11 @@ def get_best_coordinate(scoreCache):
     best_coordinate, best_score = scoreCache.get_best_coordinate()
     pprint((best_coordinate, best_score))
 
+
+    
+
 def main():
+ 
     scoreCache = initialize_system()
     while True:
         choice = input("Enter 1 to see status, Enter 2 to get the best coordinate, 3 to quit: ")
@@ -30,6 +35,6 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")
-
+   
 if __name__ == '__main__':
     main()
