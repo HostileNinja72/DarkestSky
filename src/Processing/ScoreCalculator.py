@@ -1,5 +1,5 @@
 from Config.config import RADIUS
-from src.DataSource import DataSource
+from DataSource import DataSource
 
 class ScoreCalculator:
 
@@ -27,7 +27,7 @@ class ScoreCalculator:
         # Fetch or compute values for each factor using the data_source
         light_pollution = self.data_source.get_light_pollution(coordinate)
         clouds = self.data_source.get_clouds(coordinate)
-        moon = self.data_source.get_moon_brightness(coordinate)
+        moon = self.data_source.get_moon_brightness()
         elevation = self.data_source.get_elevation(coordinate)
         air_quality = self.data_source.get_air_quality(coordinate)
         wind = self.data_source.get_wind(coordinate)
