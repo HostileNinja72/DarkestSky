@@ -2,12 +2,13 @@
 
 tests/morocco.py
 tests/moon.py
-
+tests/
 resources/
+src/Config
 
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
- src/Config
+

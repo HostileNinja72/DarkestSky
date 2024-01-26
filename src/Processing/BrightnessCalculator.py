@@ -13,7 +13,7 @@ class BrightnessCalculator:
             artif_bright = artif_bright_micro / 1000.0
             total_brightness = artif_bright + NATURAL_BRIGHTNESS
             sqm = math.log10(total_brightness / 108000000) / -0.4
-            ratio = artif_bright / NATURAL_BRIGHTNESS
+            #ratio = artif_bright / NATURAL_BRIGHTNESS
             '''print({
             "Artif. bright.": f"{artif_bright_micro} μcd/m2",
             "Total brightness": f"{total_brightness:.2f} mcd/m2",

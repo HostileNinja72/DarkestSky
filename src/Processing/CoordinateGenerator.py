@@ -34,6 +34,7 @@ class CoordinateGenerator:
         Returns:
             tuple: A tuple containing the new latitude and longitude in degrees.
         """
+        
         delta_lat = (dy / self.EARTH_RADIUS) * (180 / math.pi)
         delta_long = (dx / self.EARTH_RADIUS) * (180 / math.pi) / math.cos(math.radians(lat))
 

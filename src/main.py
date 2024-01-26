@@ -1,5 +1,4 @@
 from Processing.CoordinateGenerator import CoordinateGenerator
-from Processing.MoonHandler import MoonHandler
 from pprint import pprint 
 from ScoreCache import ScoreCache
 from Config.config import LAT, LON, RADIUS
@@ -19,7 +18,7 @@ def get_best_coordinate(scoreCache):
     pprint((best_coordinate, best_score))
 
 
-    
+
 
 def main():
  

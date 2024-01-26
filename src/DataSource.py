@@ -46,7 +46,7 @@ class DataSource:
         return random.uniform(0, 100)
 
     def get_moon_brightness(self):
-        return MoonHandler(self.time).brightness();
+        return  random.uniform(0, 100) #MoonHandler(self.time).brightness();
 
     def get_elevation(self, coordinate):
         # Random elevation value between 0 and 5000 meters

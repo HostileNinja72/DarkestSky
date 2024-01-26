@@ -6,12 +6,13 @@ spice.furnsh('../resources/naif0012.tls')  # Load the leap seconds kernel
 spice.furnsh('../resources/de430.bsp')  # Load the ephemeris file
 
 
-class MoonHandler:
-    def __init__(self, time):
-        self.time = time
+class MoonHandler():
+    @staticmethod
+    def calculate_positions(time):
         et = spice.str2et(time)
-        self.pos_moon, _ = spice.spkpos('MOON', et, 'J2000', 'NONE', 'EARTH')
-        self.pos_sun, _ = spice.spkpos('SUN', et, 'J2000', 'NONE', 'EARTH')
+        pos_moon, _ = spice.spkpos('MOON', et, 'J2000', 'NONE', 'EARTH')
+        pos_sun, _ = spice.spkpos('SUN', et, 'J2000', 'NONE', 'EARTH')
+        return pos_moon, pos_sun
 
     @staticmethod
     def calculate_RA_vector(pos):
@@ -19,38 +20,45 @@ class MoonHandler:
         RA = math.degrees(math.atan2(y, x))
         return RA
     
-    def calculate_distance(self):
-        return np.linalg.norm(self.pos_moon)
+    @staticmethod
+    def calculate_distance(pos_moon):
+        return np.linalg.norm(pos_moon)
 
-    def phase(self):
-        RA_moon = MoonHandler.calculate_RA_vector(self.pos_moon)
-        RA_sun = MoonHandler.calculate_RA_vector(self.pos_sun)
+    @staticmethod
+    def phase(pos_moon, pos_sun):
+        RA_moon = MoonHandler.calculate_RA_vector(pos_moon)
+        RA_sun = MoonHandler.calculate_RA_vector(pos_sun)
 
         O = math.acos(
-            np.dot(self.pos_moon, self.pos_sun) /
-            (np.linalg.norm(self.pos_moon[:2]) * np.linalg.norm(self.pos_sun[:2]))
+            np.dot(pos_moon, pos_sun) /
+            (np.linalg.norm(pos_moon[:2]) * np.linalg.norm(pos_sun[:2]))
         )
         O_degrees = math.degrees(O)
         
         if RA_moon < RA_sun:
             O_degrees = -O_degrees
-        
         return O_degrees
-    def brightness(self):
-        return ((abs(self.phase())/180)*(pow(self.calculate_distance()/356500,2)))/1.3
-
     
+    @staticmethod
+    def brightness(phase, distance):
+        return ((abs(phase)/180)*(pow(distance/356500,2)))/1.3
 
-    
+class ObserverMoon:
+# Hypothetical function to calculate moonrise time - real implementation can be much more complex
+    def calculate_moonrise(time, observer_coordinates):
+        # Calculation code here
+        pass
+    def calculate_moonset(time, observer_coordinates):
+        pass
 
+# Usage example:
+"""time = "2023-01-01T00:00:00"
+pos_moon, pos_sun = CelestialMoon.calculate_positions(time)
 
+distance = CelestialMoon.calculate_distance(pos_moon)
+ph = CelestialMoon.phase(pos_moon, pos_sun)
+br = CelestialMoon.brightness(ph, distance)
 
-
-
-"""time = "2023-10-24 20:30:00"
-moon_handler = MoonHandler(time)
-print(f"Distance from Earth to Moon: {moon_handler.calculate_distance():.2f} km")
-print(f"Phase: {moon_handler.phase():.2f} degrees")"""
-
-
-
+observer_coordinates = {'latitude': 40.7128, 'longitude': -74.0060}  # Example coordinates for NYC
+moonrise_time = ObserverMoon.calculate_moonrise(time, observer_coordinates)
+"""
