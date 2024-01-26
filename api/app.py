@@ -27,7 +27,7 @@ def get_best_coordinate(scoreCache):
 
 @app.route('/perform_action', methods=['POST'])
 def perform_action():
-    global scoreCache  # Declare global variable to modify it
+    global scoreCache  
     data = request.get_json()  
     lat = data.get('lat')
     lon = data.get('lon')
@@ -50,7 +50,7 @@ def perform_action():
         best, _ = get_best_coordinate(scoreCache)
         return jsonify({'lat': best[0], 'long': best[1]})
 
-    # ... additional actions can be handled here
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

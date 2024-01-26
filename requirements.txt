@@ -2,4 +2,5 @@ requests>=2.26.0
 windows-curses; platform_system == "Windows"
 spiceypy
 numpy
+flask
 #python -r requirements.txt (command)

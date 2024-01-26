@@ -21,6 +21,7 @@ class ScoreCache:
                 heapq.heappush(self.queue, (-score, expiry_time, coordinate))
             except Exception as e:
                 print(f"Failed to calculate score for {coordinate}. Error: {e}")
+                exit(1)
 
     def _peek(self, heap):
         """Peek at the top item of the heap without popping it."""
