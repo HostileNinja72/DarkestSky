@@ -1,4 +1,7 @@
 # .gitignore
+api/
+.venv/
+
 
 tests/morocco.py
 tests/moon.py

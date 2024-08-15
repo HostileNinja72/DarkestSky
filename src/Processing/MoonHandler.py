@@ -43,22 +43,3 @@ class MoonHandler():
     def brightness(phase, distance):
         return ((abs(phase)/180)*(pow(distance/356500,2)))/1.3
 
-class ObserverMoon:
-# Hypothetical function to calculate moonrise time - real implementation can be much more complex
-    def calculate_moonrise(time, observer_coordinates):
-        # Calculation code here
-        pass
-    def calculate_moonset(time, observer_coordinates):
-        pass
-
-# Usage example:
-"""time = "2023-01-01T00:00:00"
-pos_moon, pos_sun = CelestialMoon.calculate_positions(time)
-
-distance = CelestialMoon.calculate_distance(pos_moon)
-ph = CelestialMoon.phase(pos_moon, pos_sun)
-br = CelestialMoon.brightness(ph, distance)
-
-observer_coordinates = {'latitude': 40.7128, 'longitude': -74.0060}  # Example coordinates for NYC
-moonrise_time = ObserverMoon.calculate_moonrise(time, observer_coordinates)
-"""

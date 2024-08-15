@@ -21,20 +21,10 @@ class DataSource:
             "qd": f"{long},{lat}"
         }
 
-        headers = {
-            "Accept": "*/*",
-            "Accept-Language": "en-US,en;q=0.5",
-            "Accept-Encoding": "gzip, deflate",
-            "Origin": "https://www.lightpollutionmap.info",
-            "Referer": "https://www.lightpollutionmap.info/",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-site",
-            "Te": "trailers"
-        }
+       
 
         try:
-            response = requests.get(url, params=query_params, headers=headers)
+            response = requests.get(url, params=query_params)
             response.raise_for_status()  # Raise an exception if the response contains an error status code
             return BrightnessCalculator(response.text).compute_brightness_data()
         except requests.RequestException as e:
