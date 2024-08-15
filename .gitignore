@@ -1,7 +1,7 @@
 # .gitignore
 
-tests/morocco.py
-tests/moon.py
+api/
+.venv/
 tests/
 resources/
 src/Config
@@ -10,5 +10,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
 
 

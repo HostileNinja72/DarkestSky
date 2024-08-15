@@ -3,4 +3,5 @@ windows-curses; platform_system == "Windows"
 spiceypy
 numpy
 flask
+redis
 #python -r requirements.txt (command)

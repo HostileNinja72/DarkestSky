@@ -15,7 +15,6 @@ class ScoreCalculator:
     }
 
     def __init__(self):
-        # Assuming a data source or API which provides the values for each factor
         self.data_source = DataSource()
     
     def normalize(self, value, max_value, min_value=0, reverse=False):
