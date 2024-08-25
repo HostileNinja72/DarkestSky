@@ -8,7 +8,7 @@ class BrightnessCalculator:
 
     def compute_brightness_data(self):
         try:
-            brightness, elevation = self.data.split(',')
+            brightness, elevation = self.data.split('.')
             artif_bright_micro = float(brightness) * 1000
             artif_bright = artif_bright_micro / 1000.0
             total_brightness = artif_bright + NATURAL_BRIGHTNESS
@@ -24,7 +24,7 @@ class BrightnessCalculator:
         })'''
             return sqm
         except ValueError:
-            print("Error: Data format is not as expected.")
+            print(f"Error: Data format is not as expected, {self.data}")
             return None
         except ZeroDivisionError:
             print("Error: Division by zero encountered.")
