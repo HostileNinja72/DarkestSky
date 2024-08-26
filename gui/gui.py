@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QDockWidget,
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QUrl, Qt
 
-# Add src directory to the system path
+
 src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
 sys.path.insert(0, src_dir)
 

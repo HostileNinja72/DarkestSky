@@ -20,6 +20,7 @@ Moon data are locally calculated in [Moon handler](./src/Processing/MoonHandler.
 
 These files are read with the help `spiceypy` library.
 
-
-
+## GUI
+At first, im developing an admin dashboard to see the visualize the data and to ease admin control over the software.
+We use `PyQt5` with `folium` for this task. The implementation of the GUI is still primitive and still under development.
 
