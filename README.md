@@ -1,6 +1,6 @@
 # Darkest Sky
 
-This Project represents the convergence of my passion for astronomy with the craft of programming. It servers as a dynamic project where i apply scientific knowledge from astronomy and geography through sophisticated techniques.
+This Project represents the convergence of my passion for astronomy with the craft of programming. It servers as a dynamic project where i apply scientific knowledge from astronomy and geography through programming techniques.
 
 My goal is to make **Darkest sky** a platform where astronomy amateurs can meet at a certain stargazing spot, and organize events.
 
@@ -39,7 +39,7 @@ These files are read with the help `spiceypy` library.
 
 ## GUI
 At first, im developing an admin dashboard to visualize the data and to ease admin control over the software.
-We use `PyQt5` with `folium` for this task. The implementation of the GUI is primitive and still under development.
+We use `PyQt5` with `folium` for this task. The implementation of the GUI is still under development.
 
 
 
