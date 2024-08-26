@@ -38,6 +38,18 @@ class ScoreCache:
                 return coordinate, -negative_score
         return None, None
 
+    def _get_best_coordinates(self, n):
+        best_coordinates = []
+        while self.queue and len(best_coordinates) < n:
+            top_item = self._peek(self.queue)
+            _, expiry_time, _ = top_item
+            if expiry_time <= time.time():  # If expired
+                heapq.heappop(self.queue)
+            else:
+                negative_score, _, coordinate = top_item
+                best_coordinates.append((coordinate, -negative_score))
+        return best_coordinates
+
 
     def get_score(self, coordinate):
         return self.scores.get(coordinate)

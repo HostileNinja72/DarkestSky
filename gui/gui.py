@@ -1,51 +1,111 @@
 import sys
 import os
 import folium
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QDockWidget, QWidget, QToolBar, QPushButton, QGraphicsOpacityEffect
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, Qt
+
+# Add src directory to the system path
+src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
+sys.path.insert(0, src_dir)
+
+from ScoreCache import ScoreCache
+from Processing.CoordinateGenerator import CoordinateGenerator
+from Config.config import RADIUS, LAT, LON
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("GUI testing/learning")
+        self.setWindowTitle("Map Viewer")
         self.setGeometry(100, 100, 800, 600)
-        self.initUI()
+        
+        # Initialize score_cache here
+        self.score_cache = None
+        self.score_cache = self._initialize_system(LAT, LON) 
+        self._initializeUI()
+        
 
-    def initUI(self):
-    
+
+    def _initializeUI(self):
+        self._create_central_widget()
+        self._create_toolbar()
+        self._create_sidebar()
+        self._create_web_view()
+        
+        if self.score_cache is not None:
+            self._display_folium_map()
+        else:
+            print("Error initializing the system, score cache is None")
+            exit(1)
+
+    def _create_central_widget(self):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-
-        
         layout = QVBoxLayout()
         central_widget.setLayout(layout)
 
-       
+    def _create_toolbar(self):
+        toolbar = QToolBar("Main Toolbar")
+        self.addToolBar(toolbar)
+
+    def _create_sidebar(self):
+        sidebar = QDockWidget("Controls", self)
+        sidebar.setAllowedAreas(Qt.LeftDockWidgetArea)
+        sidebar_widget = QWidget()
+        sidebar_layout = QVBoxLayout()
+        sidebar_widget.setLayout(sidebar_layout)
+        test_button = QPushButton("Test Button")
+        sidebar_layout.addWidget(test_button)
+        sidebar.setWidget(sidebar_widget)
+        self.addDockWidget(Qt.LeftDockWidgetArea, sidebar)
+
+        opacity_effect = QGraphicsOpacityEffect()
+        opacity_effect.setOpacity(0.5)
+        sidebar.setGraphicsEffect(opacity_effect)
+
+    def _create_web_view(self):
         self.web_view = QWebEngineView()
-        layout.addWidget(self.web_view)
+        self.centralWidget().layout().addWidget(self.web_view)
 
-        
+    def _display_folium_map(self):
+        map_location = [LAT, LON]
+        zoom_start = 13
+        tiles = "CartoDB dark_matter"
+
+        # Create Folium map
         folium_map = folium.Map(
-            location=[33.53210, -5.10950],
-            zoom_start=13,
-            tiles="CartoDB dark_matter", # dark theme
+            location=map_location,
+            zoom_start=zoom_start,
+            tiles=tiles,
             min_zoom=3,
-            max_bounds = True # Set the minimum zoom level
+            max_bounds=True
         )
-         
-        """cartodb positron"""
-        folium.CircleMarker(location=[33.53210, -5.10950 ], fill=True).add_to(folium_map)
 
-        
+        # Save the map to an HTML file and display it in the web view
         html_file = os.path.abspath('folium_map.html')
+        self._render_best_coordinates(folium_map)
         folium_map.save(html_file)
-
-       
         self.web_view.setUrl(QUrl.fromLocalFile(html_file))
+
+    def _initialize_system(self, lat, lon):
+        coordinates_generator = CoordinateGenerator(10)
+        coordinates = coordinates_generator.generate_grid_in_circle(lat, lon, RADIUS)
+        score_cache = ScoreCache(coordinates)
+        score_cache.calculate_and_add_scores_bulk(coordinates)
+        return score_cache
+
+    def _get_best_coordinates(self, score_cache):
+        best_coordinates = score_cache.get_best_coordinates(10) # Get the top 10 coordinates
+        return best_coordinates
+
+    def _render_best_coordinates(self, map):
+        best_coordinates = self._get_best_coordinates(self.score_cache)
+        for coordinate, score in best_coordinates:
+            folium.Marker(location=coordinate, popup=f"Score: {score}").add_to(map)
+        
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWin = MainWindow()
-    mainWin.show()
+    window = MainWindow()
+    window.show()
     sys.exit(app.exec_())

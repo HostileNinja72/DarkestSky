@@ -1,7 +1,7 @@
 import random
 import requests 
 from Processing.BrightnessCalculator import BrightnessCalculator
-#from Processing.MoonHandler import MoonHandler
+from Processing.MoonHandler import MoonHandler
 from Config.config import LIGHT_POLLUTION_KEY as key_lp
 from datetime import datetime
 
@@ -22,8 +22,10 @@ class DataSource:
         }
         try:
             response = requests.get(url, params=query_params)
-            print(response.text)
             response.raise_for_status()  
+            if(response.text == "Daily quota exceeded"):
+                print("Daily quota exceeded, no light pollution data ;(")
+                exit(1)
             return BrightnessCalculator(response.text).compute_brightness_data()
         except requests.RequestException as e:
             print(f"Error fetching light pollution data: {e}")

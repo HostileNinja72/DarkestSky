@@ -2,7 +2,7 @@
 
 .venv/
 
-folium_map.html
+
 
 tests/morocco.py
 tests/moon.py
