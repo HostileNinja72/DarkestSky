@@ -23,7 +23,7 @@ WEIGHTS = {
         "distance": 0.1
     }
 ```
-This score mechanism is ofc subject to change, as there are non-linear effects, and threshhold effects.
+This score mechanism is ofc subject to change, as there are non-linear effects, and threshhold effects. To change a study must be conducted for precision.
 
 
 ### Light Pollution
