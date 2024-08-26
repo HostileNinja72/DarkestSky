@@ -10,7 +10,7 @@ This software utilizes a [score system](./src/Processing/ScoreCalculator.py) tha
  
 > Coordinate generator utilises geospatial computation to generates the coords in a circular area.
 ### Score 
-It is calculated in a straightforward manner, with a linear model.
+It is calculated in a straightforward manner, with a linear model. Here are the weights:
 
 ```python
 WEIGHTS = {
@@ -27,7 +27,7 @@ This score mechanism is ofc subject to change, as there are non-linear effects, 
 
 
 ### Light Pollution
-The **light pollution** data are from the Word Atlas 2015 dataset provided by the lightpollution api, which provides measurements to estimate light pollution levels.
+The [**light pollution**](./src/DataSource.py) data are from the Word Atlas 2015 dataset provided by the lightpollution api, which provides measurements to estimate light pollution levels.
 
 ### Moon data
 Moon data are locally calculated in [Moon handler](./src/Processing/MoonHandler.py) from the `de430.bsp` and `naif0012.tls` files.
