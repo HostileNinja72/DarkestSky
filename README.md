@@ -9,6 +9,23 @@ My goal is to make **Darkest sky** a platform where astronomy amateurs can meet 
 This software utilizes a [score system](./src/Processing/ScoreCalculator.py) that take into consideration, **light pollution**, **clouds**, **moon phase/brightness**... With each variable having its own **weight**. The [**Coordinate generator**](./src/Processing/CoordinateGenerator.py), as it names suggest, generate coordinates for a given radius, under a grid. It calculates the score for each coordinate and then it output the best spot. 
  
 > Coordinate generator utilises geospatial computation to generates the coords in a circular area.
+### Score 
+It is calculated in a straightforward manner, with a linear model.
+
+```python
+WEIGHTS = {
+        "light_pollution": 0.3,
+        "clouds": 0.2,
+        "moon": 0.15,
+        "elevation": 0.1,
+        "air_quality": 0.1,
+        "wind": 0.05,
+        "distance": 0.1
+    }
+```
+This score mechanism is ofc subject to change, as there are non-linear effects, and threshhold effects.
+
+
 ### Light Pollution
 The **light pollution** data are from the Word Atlas 2015 dataset provided by the lightpollution api, which provides measurements to estimate light pollution levels.
 
@@ -22,5 +39,7 @@ These files are read with the help `spiceypy` library.
 
 ## GUI
 At first, im developing an admin dashboard to visualize the data and to ease admin control over the software.
-We use `PyQt5` with `folium` for this task. The implementation of the GUI is still primitive and still under development.
+We use `PyQt5` with `folium` for this task. The implementation of the GUI is primitive and still under development.
+
+
 
