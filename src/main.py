@@ -4,8 +4,9 @@ from ScoreCache import ScoreCache
 from Config.config import LAT, LON, RADIUS
 
 def initialize_system():
-    coordinatesGenerator = CoordinateGenerator(10)
+    coordinatesGenerator = CoordinateGenerator(20)
     coordinates = coordinatesGenerator.generate_grid_in_circle(LAT, LON, RADIUS)
+    print(coordinatesGenerator.get_number_of_coords()) # 16 api calls light pollution per execution
     scoreCache = ScoreCache(coordinates)
     scoreCache.calculate_and_add_scores_bulk(coordinates)
     return scoreCache

@@ -9,7 +9,7 @@ class ScoreCalculator:
         "clouds": 0.2,
         "moon": 0.15,
         "elevation": 0.1,
-        "air_quality": 0.1,
+        "visibility": 0.1,
         "wind": 0.05,
         "distance": 0.1
     }
@@ -29,7 +29,7 @@ class ScoreCalculator:
         clouds = self.data_source.get_clouds(coordinate)
         moon = self.data_source.get_moon_brightness()
         elevation = self.data_source.get_elevation(coordinate)
-        air_quality = self.data_source.get_air_quality(coordinate)
+        visibility = self.data_source.get_visibility(coordinate)
         wind = self.data_source.get_wind(coordinate)
         distance = self.data_source.get_distance(coordinate)
 
@@ -40,7 +40,7 @@ class ScoreCalculator:
             "clouds": self.normalize(clouds, max_value=100, reverse=True),
             "moon": self.normalize(moon, max_value=1, reverse=True),
             "elevation": self.normalize(elevation, max_value=3000),  # assuming max elevation of 5000 meters
-            "air_quality": self.normalize(air_quality, max_value=500, reverse=True),  # assuming AQI max of 500
+            "visibility": self.normalize(visibility, max_value=15), 
             "wind": self.normalize(wind, max_value=50, reverse=True),  # assuming max wind speed of 50 km/h
             "distance": self.normalize(distance, max_value=RADIUS, reverse=True)  # assuming max distance of 500 km
         }
