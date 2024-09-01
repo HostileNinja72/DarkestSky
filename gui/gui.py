@@ -9,6 +9,7 @@ from PyQt5.QtCore import QUrl, Qt
 src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
 sys.path.insert(0, src_dir)
 
+
 from ScoreCache import ScoreCache
 from Processing.CoordinateGenerator import CoordinateGenerator
 from Config.config import RADIUS, LAT, LON
@@ -19,7 +20,6 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Map Viewer")
         self.setGeometry(100, 100, 800, 600)
         
-        # Initialize score_cache here
         self.score_cache = None
         self.score_cache = self._initialize_system(LAT, LON) 
         self._initializeUI()
@@ -81,7 +81,6 @@ class MainWindow(QMainWindow):
             max_bounds=True
         )
 
-        # Save the map to an HTML file and display it in the web view
         html_file = os.path.abspath('folium_map.html')
         self._render_best_coordinates(folium_map)
         folium_map.save(html_file)
@@ -95,13 +94,22 @@ class MainWindow(QMainWindow):
         return score_cache
 
     def _get_best_coordinates(self, score_cache):
-        best_coordinates = score_cache.get_best_coordinates(10) # Get the top 10 coordinates
+        best_coordinates = score_cache._get_best_coordinates(10) # Get the top 10 coordinates
         return best_coordinates
 
     def _render_best_coordinates(self, map):
         best_coordinates = self._get_best_coordinates(self.score_cache)
         for coordinate, score in best_coordinates:
-            folium.Marker(location=coordinate, popup=f"Score: {score}").add_to(map)
+            popup_html = f"""
+            <b>Coordinates:</b> {coordinate[0]:.6f}, {coordinate[1]:.6f}<br>
+            <b>Score:</b> {score}<br>
+            <b>Description:</b> This is a point of interest.
+            """
+            folium.Marker(
+                location=coordinate,
+                popup=folium.Popup(popup_html, max_width=300)  # You can set max_width for the popup
+            ).add_to(map)
+
         
 
 if __name__ == "__main__":
